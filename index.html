@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-<title>Goku RPG v0.5 Pose Combat</title>
+<title>Goku RPG v0.6 Combat UI</title>
 
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -250,11 +250,7 @@ border-radius:5px;
 /* GAME-READY 2D FIGHTER */
 .gokuArt{width:100%;height:100%;object-fit:contain;image-rendering:auto;filter:drop-shadow(0 5px 2px rgba(0,0,0,.35));pointer-events:none}
 #goku{width:125px;height:175px;left:9%}
-.jab .gokuArt{transform:skewX(-8deg) scaleX(1.08)}
-.cross .gokuArt{transform:rotate(5deg) scaleX(1.08)}
-.frontKick .gokuArt{transform:rotate(-7deg) scale(1.08)}
-.heavyKick .gokuArt{transform:rotate(-14deg) scale(1.12)}
-.gokuArt{transition:transform .12s}
+.gokuArt{transition:transform .08s;transform-origin:50% 72%}
 
 /* PIXEL FIGHTER v0.4 */
 .spriteGoku{filter:drop-shadow(0 4px 0 rgba(0,0,0,.28));image-rendering:pixelated}
@@ -345,45 +341,25 @@ to{transform:translateY(-4px)}
 animation:jab .38s ease-out;
 }
 
-@keyframes jab{
-0%{transform:translateX(0)}
-35%{transform:translateX(95px)}
-50%{transform:translateX(115px) scaleX(1.08)}
-100%{transform:translateX(0)}
-}
+@keyframes jab{0%,100%{transform:translateX(0)} 45%{transform:translateX(10px)}}
 
 .cross{
 animation:cross .48s ease-out;
 }
 
-@keyframes cross{
-0%{transform:translateX(0) rotate(0)}
-45%{transform:translateX(110px) rotate(-7deg)}
-60%{transform:translateX(125px) rotate(8deg) scale(1.08)}
-100%{transform:translateX(0) rotate(0)}
-}
+@keyframes cross{0%,100%{transform:translateX(0) rotate(0)} 50%{transform:translateX(12px) rotate(2deg)}}
 
 .frontKick{
 animation:frontKick .52s ease-out;
 }
 
-@keyframes frontKick{
-0%{transform:translateX(0)}
-40%{transform:translateX(100px) rotate(-3deg)}
-58%{transform:translateX(135px) rotate(5deg) scaleX(1.12)}
-100%{transform:translateX(0)}
-}
+@keyframes frontKick{0%,100%{transform:translateX(0)} 50%{transform:translateX(10px)}}
 
 .heavyKick{
 animation:heavyKick .62s ease-out;
 }
 
-@keyframes heavyKick{
-0%{transform:translateX(0) rotate(0)}
-35%{transform:translateX(80px) rotate(-8deg)}
-58%{transform:translateX(140px) rotate(15deg) scale(1.12)}
-100%{transform:translateX(0) rotate(0)}
-}
+@keyframes heavyKick{0%,100%{transform:translateX(0) rotate(0)} 50%{transform:translateX(8px) rotate(-2deg)}}
 
 .enemyAttack{
 animation:enemyAttack .45s ease-out;
@@ -566,68 +542,30 @@ z-index:20;
 /* ABILITY BAR */
 
 .controls{
-position:absolute;
-bottom:0;
-left:0;
-right:0;
-height:25%;
-background:rgba(3,8,18,.95);
-display:flex;
-gap:5px;
-padding:7px;
-z-index:25;
+position:absolute;bottom:0;left:0;right:0;height:25%;
+background:rgba(3,8,18,.95);display:flex;align-items:center;justify-content:space-evenly;
+gap:8px;padding:8px;z-index:25
 }
-
 .skill{
-flex:1;
-border:2px solid #368fd5;
-border-radius:10px;
-color:white;
-font-weight:900;
-background:linear-gradient(#155b91,#071d35);
-font-size:9px;
-position:relative;
-overflow:hidden;
-padding:3px;
+--kiProgress:0deg;--ring:#35c9ff;
+width:min(21vw,86px);height:min(21vw,86px);flex:0 0 auto;border:0;border-radius:50%;
+color:white;font-weight:900;font-size:8px;position:relative;overflow:visible;padding:7px;
+background:conic-gradient(var(--ring) var(--kiProgress),rgba(75,105,135,.28) 0);
+filter:drop-shadow(0 0 5px rgba(52,194,255,.45));
 }
-
 .skill::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-right:0;
-height:40%;
-background:linear-gradient(
-rgba(74,188,255,.5),
-transparent
-);
+content:"";position:absolute;inset:5px;border-radius:50%;
+background:radial-gradient(circle at 40% 28%,#176da6,#071b31 70%);border:2px solid #244d6d;
 }
-
-.skill:disabled{
-opacity:.32;
-filter:grayscale(.8);
-}
-
-.skillName{
-position:relative;
-z-index:2;
-display:block;
-}
-
-.cost{
-display:block;
-position:relative;
-z-index:2;
-color:#55d3ff;
-margin-top:5px;
-font-size:10px;
-}
-
-.ultimate{
-border-color:#9a72ff;
-background:linear-gradient(#4a2e98,#160b3e);
-}
+.skill::after{content:"";position:absolute;inset:-2px;border-radius:50%;box-shadow:0 0 8px var(--ring);opacity:.9}
+.skill:disabled{opacity:.72;filter:grayscale(.45)}
+.skill.ready{animation:readyPulse .85s infinite alternate;filter:drop-shadow(0 0 9px var(--ring))}
+.skill.ready::after{box-shadow:0 0 9px var(--ring),0 0 18px var(--ring)}
+@keyframes readyPulse{to{transform:scale(1.045)}}
+.skillName,.cost{position:relative;z-index:2;display:block}
+.cost{color:#63dcff;margin-top:4px;font-size:9px}
+.ultimate{--ring:#b679ff}
+.ultimate::before{background:radial-gradient(circle at 40% 28%,#5a329f,#170c36 72%)}
 
 /* RESULTS */
 
@@ -843,6 +781,12 @@ document.getElementById(id);
    HUD
 ========================= */
 
+function setKiRing(id,cost){
+const b=$(id); if(!b)return;
+const progress=Math.min(1,goku.ki/cost);
+b.style.setProperty("--kiProgress",(progress*360)+"deg");
+b.classList.toggle("ready",goku.ki>=cost&&!battleOver&&!abilityBusy);
+}
 function updateHUD(){
 
 $("playerHP").style.width=
@@ -883,6 +827,11 @@ $("spiritBtn").disabled=
 battleOver||
 abilityBusy||
 goku.ki<100;
+
+setKiRing("kiBtn",20);
+setKiRing("meteorBtn",40);
+setKiRing("kameBtn",70);
+setKiRing("spiritBtn",100);
 }
 
 function combatText(message){
