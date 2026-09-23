@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-<title>Goku RPG v0.3</title>
+<title>Goku RPG v0.4</title>
 
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -1512,7 +1512,7 @@ updateHUD();
 ========================= */
 
 /*
-1.75 KI PER SECOND
+2.5 KI PER SECOND
 */
 
 setInterval(()=>{
@@ -1522,7 +1522,7 @@ if(!battleOver){
 goku.ki=
 Math.min(
 goku.maxKi,
-goku.ki+.175
+goku.ki+.25
 );
 
 updateHUD();
