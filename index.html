@@ -1,34 +1,135 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Goku 2D RPG - Combat Test</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Goku RPG</title>
 <style>
-* {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+*{box-sizing:border-box}body{margin:0;background:#111;color:white;font-family:Arial;overflow:hidden}
+#game{height:100vh;position:relative;background:linear-gradient(#55b9ed 0 55%,#83c95d 55% 78%,#426c32 78%)}
+.hud{position:absolute;top:15px;width:42%;z-index:5}.g{left:4%}.e{right:4%;text-align:right}
+.name{font-weight:bold}.bar{height:18px;background:#222;border:2px solid white;border-radius:10px;overflow:hidden;margin:5px 0}
+.fill{height:100%;width:100%}#ghp{background:#39d353}#ki{background:#2699ff}#ehp{background:#e54848}
+.fighter{position:absolute;bottom:30%;font-size:70px}.goku{left:15%}.enemy{right:15%}
+#log{position:absolute;bottom:27%;width:100%;text-align:center;font-weight:bold;text-shadow:1px 2px #000}
+.controls{position:absolute;bottom:0;width:100%;height:23%;display:flex;gap:6px;padding:9px;background:#111d}
+button{flex:1;border:2px solid #aaa;border-radius:12px;background:#18395c;color:white;font-weight:bold;font-size:12px}
+button:disabled{opacity:.3}.cost{display:block;color:#69c8ff;margin-top:5px}
+#result{display:none;position:absolute;top:38%;width:100%;text-align:center;font-size:36px;font-weight:bold;text-shadow:2px 3px #000;z-index:10}
+#again{display:none;position:absolute;top:50%;left:35%;width:30%;height:55px;z-index:11}
+</style>
+</head>
+<body>
+
+<div id="game">
+
+<div class="hud g">
+<div class="name">GOKU</div>
+<div class="bar"><div id="ghp" class="fill"></div></div>
+<div class="bar"><div id="ki" class="fill"></div></div>
+<div id="gs"></div>
+</div>
+
+<div class="hud e">
+<div class="name">TRAINING SAIBAMAN</div>
+<div class="bar"><div id="ehp" class="fill"></div></div>
+<div id="es"></div>
+</div>
+
+<div class="fighter goku">🥋</div>
+<div class="fighter enemy">👹</div>
+
+<div id="result"></div>
+<button id="again" onclick="location.reload()">FIGHT AGAIN</button>
+
+<div id="log">Combat started!</div>
+
+<div class="controls">
+<button id="b1" onclick="ability(15,1.25,'Ki Blast')">
+KI BLAST
+<span class="cost">15 KI</span>
+</button>
+
+<button id="b2" onclick="ability(75,4,'Kamehameha')">
+KAMEHAMEHA
+<span class="cost">75 KI</span>
+</button>
+
+<button id="b3" onclick="ability(85,7,'Spirit Bomb')">
+SPIRIT BOMB
+<span class="cost">85 KI</span>
+</button>
+</div>
+
+</div>
+
+<script>
+let hp=1000,ehp=1000,ki=0,over=false;
+const $=x=>document.getElementById(x);
+
+function update(){
+ $("ghp").style.width=hp/10+"%";
+ $("ehp").style.width=ehp/10+"%";
+ $("ki").style.width=ki+"%";
+
+ $("gs").innerText=Math.ceil(hp)+" HP • "+Math.floor(ki)+" KI";
+ $("es").innerText=Math.ceil(ehp)+" HP";
+
+ $("b1").disabled=over||ki<15;
+ $("b2").disabled=over||ki<75;
+ $("b3").disabled=over||ki<85;
 }
 
-body {
-  margin: 0;
-  background: #111;
-  color: white;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
-  touch-action: manipulation;
+function damageEnemy(dmg,name){
+ if(over)return;
+ ehp=Math.max(0,ehp-dmg);
+ $("log").innerText=name+" dealt "+dmg+" damage!";
+ check();
+ update();
 }
 
-#game {
-  height: 100vh;
-  width: 100vw;
-  position: relative;
-  overflow: hidden;
-  background:
-    linear-gradient(#67b9e8 0%, #bde8ff 48%, #7bbd55 49%, #416f32 100%);
+function gokuAttack(){
+ if(!over)damageEnemy(55,"Goku");
 }
 
-/* Arena */
-.arena {
-  position
+function enemyAttack(){
+ if(over)return;
+ hp=Math.max(0,hp-40);
+ $("log").innerText="Saibaman dealt 40 damage!";
+ check();
+ update();
+}
+
+function ability(cost,multi,name){
+ if(over||ki<cost)return;
+ ki-=cost;
+ let dmg=Math.max(1,Math.round(100*multi-45));
+ damageEnemy(dmg,name);
+}
+
+function check(){
+ if(ehp<=0)end("VICTORY!");
+ else if(hp<=0)end("DEFEAT");
+}
+
+function end(text){
+ over=true;
+ $("result").innerText=text;
+ $("result").style.display="block";
+ $("again").style.display="block";
+}
+
+setInterval(()=>{
+ if(!over){
+  ki=Math.min(100,ki+.5);
+  update();
+ }
+},100);
+
+setInterval(gokuAttack,2000);
+setInterval(enemyAttack,2500);
+
+update();
+</script>
+
+</body>
+</html>
