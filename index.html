@@ -3,93 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-<title>Goku RPG v0.2</title>
+<title>Goku RPG v0.3</title>
 
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:#050a12;color:white;font-family:Arial,sans-serif;overflow:hidden}
+
+body{
+margin:0;
+background:#050a12;
+color:white;
+font-family:Arial,sans-serif;
+overflow:hidden;
+}
 
 #game{
 height:100vh;
 height:100dvh;
 position:relative;
 overflow:hidden;
-background:
-linear-gradient(#168ce0 0%,#70c9f4 48%,#70aa47 49%,#31552b 100%);
+background:linear-gradient(
+#168ce0 0%,
+#70c9f4 48%,
+#70aa47 49%,
+#31552b 100%
+);
 }
 
-/* mountains */
+/* BACKGROUND */
+
 .mountain{
 position:absolute;
 bottom:39%;
-width:0;height:0;
-border-left:100px solid transparent;
-border-right:100px solid transparent;
+width:0;
+height:0;
+border-left:110px solid transparent;
+border-right:110px solid transparent;
 border-bottom:190px solid #567c62;
 opacity:.65;
 }
-.m1{left:-50px}
-.m2{left:25%}
-.m3{right:15%}
 
-/* ground */
+.m1{left:-60px}
+.m2{left:28%}
+.m3{right:8%}
+
 .ground{
 position:absolute;
-left:0;right:0;
-bottom:25%;
-height:22%;
+left:0;
+right:0;
+bottom:27%;
+height:20%;
 background:linear-gradient(#8bc65a,#8c743b);
 border-top:5px solid #547d3b;
 }
 
 /* HUD */
+
 .hud{
 position:absolute;
-top:10px;
-width:44%;
+top:9px;
+width:43%;
 z-index:20;
 font-weight:bold;
-text-shadow:1px 2px 3px black;
+text-shadow:1px 2px 3px #000;
 }
 
 .playerHUD{left:3%}
 .enemyHUD{right:3%;text-align:right}
 
 .name{
-font-size:16px;
+font-size:15px;
 font-weight:900;
 font-style:italic;
 }
 
 .bar{
-height:18px;
+height:16px;
 background:#101820;
 border:2px solid white;
 border-radius:8px;
 overflow:hidden;
-margin-top:5px;
+margin-top:4px;
 box-shadow:0 2px 4px #000;
 }
 
 .fill{
 height:100%;
-transition:width .25s;
+transition:width .2s;
 }
 
-#playerHP{background:linear-gradient(90deg,#19b949,#65f16f)}
-#enemyHP{background:linear-gradient(90deg,#ff3636,#a00000)}
-#playerKI{background:linear-gradient(90deg,#0074ff,#46d8ff)}
+#playerHP{
+background:linear-gradient(90deg,#18ad45,#67f277);
+}
+
+#enemyHP{
+background:linear-gradient(90deg,#ff3d3d,#9e0000);
+}
+
+#playerKI{
+background:linear-gradient(90deg,#0074ff,#50dfff);
+}
 
 .stats{
-font-size:11px;
-margin-top:3px;
+font-size:10px;
+margin-top:2px;
 }
 
-/* Fighters */
+/* AUTO BUTTON */
+
+#autoToggle{
+position:absolute;
+top:92px;
+left:50%;
+transform:translateX(-50%);
+z-index:30;
+border:2px solid white;
+border-radius:15px;
+padding:6px 15px;
+background:#262d37;
+color:white;
+font-size:11px;
+font-weight:900;
+}
+
+#autoToggle.autoOn{
+background:#0d719e;
+box-shadow:0 0 14px #32c8ff;
+}
+
+/* FIGHTERS */
+
 .fighter{
 position:absolute;
-bottom:30%;
-z-index:7;
+bottom:32%;
+z-index:8;
 transform-origin:bottom center;
 }
 
@@ -105,7 +151,6 @@ width:80px;
 height:120px;
 }
 
-/* simple full-body fighters */
 .head{
 position:absolute;
 left:50%;
@@ -160,10 +205,18 @@ width:18px;
 height:58px;
 background:#eaa66e;
 border-radius:10px;
+transform-origin:top center;
 }
 
-.armL{left:8px;transform:rotate(15deg)}
-.armR{right:8px;transform:rotate(-15deg)}
+.armL{
+left:8px;
+transform:rotate(15deg);
+}
+
+.armR{
+right:8px;
+transform:rotate(-15deg);
+}
 
 .leg{
 position:absolute;
@@ -172,10 +225,18 @@ width:24px;
 height:57px;
 background:#f47721;
 border-radius:8px;
+transform-origin:top center;
 }
 
-.legL{left:18px;transform:rotate(8deg)}
-.legR{right:18px;transform:rotate(-8deg)}
+.legL{
+left:18px;
+transform:rotate(8deg);
+}
+
+.legR{
+right:18px;
+transform:rotate(-8deg);
+}
 
 .boot{
 position:absolute;
@@ -186,7 +247,8 @@ background:#173c91;
 border-radius:5px;
 }
 
-/* saibaman */
+/* SAIBAMAN */
+
 .sHead{
 background:#7cad38;
 top:0;
@@ -224,12 +286,13 @@ height:43px;
 top:82px;
 }
 
-/* shadow */
+/* SHADOWS */
+
 .shadow{
 position:absolute;
-bottom:29%;
-width:100px;
-height:18px;
+bottom:31%;
+width:95px;
+height:17px;
 border-radius:50%;
 background:rgba(0,0,0,.35);
 filter:blur(3px);
@@ -239,31 +302,74 @@ z-index:3;
 .shadowG{left:11%}
 .shadowS{right:10%}
 
-/* animation */
+/* IDLE */
+
 .idle{
-animation:idle .9s infinite alternate ease-in-out;
+animation:idle .8s infinite alternate ease-in-out;
 }
 
 @keyframes idle{
 from{transform:translateY(0)}
-to{transform:translateY(-5px)}
+to{transform:translateY(-4px)}
 }
 
-.gokuAttack{
-animation:gAttack .35s;
+/* BASIC ATTACKS */
+
+.jab{
+animation:jab .38s ease-out;
 }
 
-@keyframes gAttack{
-50%{transform:translateX(130px) scale(1.1)}
+@keyframes jab{
+0%{transform:translateX(0)}
+35%{transform:translateX(95px)}
+50%{transform:translateX(115px) scaleX(1.08)}
+100%{transform:translateX(0)}
+}
+
+.cross{
+animation:cross .48s ease-out;
+}
+
+@keyframes cross{
+0%{transform:translateX(0) rotate(0)}
+45%{transform:translateX(110px) rotate(-7deg)}
+60%{transform:translateX(125px) rotate(8deg) scale(1.08)}
+100%{transform:translateX(0) rotate(0)}
+}
+
+.frontKick{
+animation:frontKick .52s ease-out;
+}
+
+@keyframes frontKick{
+0%{transform:translateX(0)}
+40%{transform:translateX(100px) rotate(-3deg)}
+58%{transform:translateX(135px) rotate(5deg) scaleX(1.12)}
+100%{transform:translateX(0)}
+}
+
+.heavyKick{
+animation:heavyKick .62s ease-out;
+}
+
+@keyframes heavyKick{
+0%{transform:translateX(0) rotate(0)}
+35%{transform:translateX(80px) rotate(-8deg)}
+58%{transform:translateX(140px) rotate(15deg) scale(1.12)}
+100%{transform:translateX(0) rotate(0)}
 }
 
 .enemyAttack{
-animation:eAttack .35s;
+animation:enemyAttack .45s ease-out;
 }
 
-@keyframes eAttack{
-50%{transform:translateX(-130px) scale(1.1)}
+@keyframes enemyAttack{
+0%{transform:translateX(0)}
+50%{transform:translateX(-125px) scale(1.08)}
+100%{transform:translateX(0)}
 }
+
+/* HIT */
 
 .hit{
 animation:hit .25s;
@@ -271,15 +377,16 @@ animation:hit .25s;
 
 @keyframes hit{
 25%{filter:brightness(3)}
-50%{transform:translateX(12px)}
-75%{transform:translateX(-8px)}
+50%{transform:translateX(10px)}
+75%{transform:translateX(-7px)}
 }
 
-/* projectiles */
+/* PROJECTILE */
+
 .projectile{
 position:absolute;
-width:28px;
-height:28px;
+width:27px;
+height:27px;
 border-radius:50%;
 background:white;
 box-shadow:
@@ -292,12 +399,12 @@ display:none;
 
 #kiBall{
 left:24%;
-bottom:42%;
+bottom:44%;
 }
 
 .fireKi{
 display:block;
-animation:kiFly .45s linear forwards;
+animation:kiFly .5s linear forwards;
 }
 
 @keyframes kiFly{
@@ -305,75 +412,109 @@ from{left:24%}
 to{left:78%}
 }
 
-/* beam */
+/* KAMEHAMEHA */
+
 #beam{
 display:none;
 position:absolute;
 left:24%;
-right:20%;
-bottom:41%;
+right:18%;
+bottom:43%;
 height:28px;
 background:white;
 border-radius:50px;
 box-shadow:
 0 0 15px white,
 0 0 30px #00b7ff,
-0 0 60px #0077ff;
+0 0 65px #0077ff;
 z-index:14;
 transform-origin:left;
 }
 
 .fireBeam{
 display:block!important;
-animation:beam .8s;
+animation:beam .85s;
 }
 
 @keyframes beam{
 0%{transform:scaleX(0)}
 25%{transform:scaleX(1)}
-80%{transform:scaleX(1)}
-100%{opacity:0}
+75%{transform:scaleX(1)}
+100%{
+transform:scaleX(1);
+opacity:0;
+}
 }
 
-/* spirit bomb */
+/* METEOR COMBO */
+
+.meteor{
+animation:meteor .9s ease-in-out;
+}
+
+@keyframes meteor{
+0%{transform:translateX(0)}
+20%{transform:translateX(140px) translateY(-15px)}
+35%{transform:translateX(150px) rotate(10deg)}
+50%{transform:translateX(135px) rotate(-12deg)}
+70%{transform:translateX(145px) translateY(-25px)}
+100%{transform:translateX(0)}
+}
+
+/* SPIRIT BOMB */
+
 #spiritBomb{
 display:none;
 position:absolute;
-left:20%;
-bottom:52%;
-width:130px;
-height:130px;
+left:18%;
+bottom:55%;
+width:125px;
+height:125px;
 border-radius:50%;
 background:white;
 box-shadow:
 0 0 30px white,
-0 0 60px #65cfff,
-0 0 100px #008cff;
+0 0 65px #65cfff,
+0 0 110px #008cff;
 z-index:15;
 }
 
 .spiritFire{
 display:block!important;
-animation:spirit 1.3s forwards;
+animation:spirit 1.4s forwards;
 }
 
 @keyframes spirit{
-0%{transform:scale(.1);left:20%;bottom:55%}
-40%{transform:scale(1);left:20%;bottom:55%}
-100%{transform:scale(.5);left:73%;bottom:37%}
+0%{
+transform:scale(.1);
+left:18%;
+bottom:57%;
+}
+40%{
+transform:scale(1);
+left:18%;
+bottom:57%;
+}
+100%{
+transform:scale(.45);
+left:73%;
+bottom:39%;
+}
 }
 
-/* damage numbers */
+/* DAMAGE */
+
 .damage{
 position:absolute;
-font-size:26px;
+font-size:25px;
 font-weight:900;
-color:#ff3333;
+color:#ff3838;
 text-shadow:
--2px -2px black,
-2px 2px black;
-z-index:30;
+-2px -2px #000,
+2px 2px #000;
+z-index:40;
 animation:damageFloat .8s forwards;
+pointer-events:none;
 }
 
 @keyframes damageFloat{
@@ -383,43 +524,45 @@ opacity:0;
 }
 }
 
-/* combat message */
+/* COMBAT TEXT */
+
 #combatText{
 position:absolute;
-bottom:25%;
+bottom:27%;
 width:100%;
 text-align:center;
+font-size:14px;
 font-weight:900;
-font-size:16px;
-text-shadow:2px 2px 3px black;
+text-shadow:2px 2px 3px #000;
 z-index:20;
 }
 
-/* controls */
+/* ABILITY BAR */
+
 .controls{
 position:absolute;
 bottom:0;
 left:0;
 right:0;
-height:23%;
-background:rgba(3,8,18,.94);
+height:25%;
+background:rgba(3,8,18,.95);
 display:flex;
-gap:7px;
-padding:8px;
+gap:5px;
+padding:7px;
 z-index:25;
 }
 
 .skill{
 flex:1;
 border:2px solid #368fd5;
-border-radius:12px;
+border-radius:10px;
 color:white;
 font-weight:900;
-background:
-linear-gradient(#155b91,#071d35);
-font-size:11px;
+background:linear-gradient(#155b91,#071d35);
+font-size:9px;
 position:relative;
 overflow:hidden;
+padding:3px;
 }
 
 .skill::before{
@@ -428,52 +571,57 @@ position:absolute;
 top:0;
 left:0;
 right:0;
-height:45%;
-background:linear-gradient(rgba(74,188,255,.5),transparent);
+height:40%;
+background:linear-gradient(
+rgba(74,188,255,.5),
+transparent
+);
 }
 
 .skill:disabled{
-opacity:.35;
-filter:grayscale(.7);
+opacity:.32;
+filter:grayscale(.8);
 }
 
 .skillName{
 position:relative;
 z-index:2;
+display:block;
 }
 
 .cost{
 display:block;
 position:relative;
 z-index:2;
-color:#48cfff;
+color:#55d3ff;
 margin-top:5px;
-font-size:12px;
+font-size:10px;
 }
 
 .ultimate{
-border-color:#7657ff;
-background:linear-gradient(#392989,#130c3c);
+border-color:#9a72ff;
+background:linear-gradient(#4a2e98,#160b3e);
 }
 
-/* result */
+/* RESULTS */
+
 #result{
 display:none;
 position:absolute;
 z-index:50;
-top:35%;
+top:34%;
 width:100%;
 text-align:center;
 font-size:42px;
 font-weight:900;
-text-shadow:3px 4px black;
+text-shadow:3px 4px #000;
 }
 
 #restart{
 display:none;
 position:absolute;
 z-index:51;
-top:48%;
+top:47%;
 left:35%;
 width:30%;
 height:55px;
@@ -508,83 +656,166 @@ animation:shake .3s;
 
 <div class="hud playerHUD">
 <div class="name">GOKU</div>
-<div class="bar"><div id="playerHP" class="fill"></div></div>
-<div class="bar"><div id="playerKI" class="fill"></div></div>
+<div class="bar">
+<div id="playerHP" class="fill"></div>
+</div>
+<div class="bar">
+<div id="playerKI" class="fill"></div>
+</div>
 <div id="gStats" class="stats"></div>
 </div>
 
 <div class="hud enemyHUD">
 <div class="name">TRAINING SAIBAMAN</div>
-<div class="bar"><div id="enemyHP" class="fill"></div></div>
+<div class="bar">
+<div id="enemyHP" class="fill"></div>
+</div>
 <div id="eStats" class="stats"></div>
 </div>
+
+<button id="autoToggle" onclick="toggleAuto()">
+MANUAL
+</button>
 
 <div class="shadow shadowG"></div>
 <div class="shadow shadowS"></div>
 
-<!-- Goku -->
+<!-- GOKU -->
+
 <div id="goku" class="fighter idle">
+
 <div class="head gokuHead">
 <div class="hair">▲</div>
 </div>
+
 <div class="body gokuBody">
 <div class="blueShirt"></div>
 </div>
+
 <div class="arm armL"></div>
 <div class="arm armR"></div>
-<div class="leg legL"><div class="boot"></div></div>
-<div class="leg legR"><div class="boot"></div></div>
+
+<div class="leg legL">
+<div class="boot"></div>
 </div>
 
-<!-- Saibaman -->
+<div class="leg legR">
+<div class="boot"></div>
+</div>
+
+</div>
+
+<!-- SAIBAMAN -->
+
 <div id="saibaman" class="fighter idle">
+
 <div class="head sHead">
 <div class="eye eye1"></div>
 <div class="eye eye2"></div>
 </div>
+
 <div class="body sBody"></div>
+
 <div class="arm armL sArm"></div>
 <div class="arm armR sArm"></div>
+
 <div class="leg legL sLeg"></div>
 <div class="leg legR sLeg"></div>
+
 </div>
 
 <div id="kiBall" class="projectile"></div>
 <div id="beam"></div>
 <div id="spiritBomb"></div>
 
-<div id="combatText">Battle started!</div>
+<div id="combatText">
+Battle started!
+</div>
 
 <div id="result"></div>
-<button id="restart" onclick="location.reload()">FIGHT AGAIN</button>
+
+<button
+id="restart"
+onclick="location.reload()">
+FIGHT AGAIN
+</button>
 
 <div class="controls">
 
-<button id="kiBtn" class="skill" onclick="useKiBlast()">
-<span class="skillName">KI BLAST</span>
-<span class="cost">15 KI</span>
+<button
+id="kiBtn"
+class="skill"
+onclick="useKiBlast(false)">
+
+<span class="skillName">
+KI BLAST
+</span>
+
+<span class="cost">
+20 KI
+</span>
+
 </button>
 
-<button id="kameBtn" class="skill" onclick="useKamehameha()">
-<span class="skillName">KAMEHAMEHA</span>
-<span class="cost">75 KI</span>
+<button
+id="meteorBtn"
+class="skill"
+onclick="useMeteor(false)">
+
+<span class="skillName">
+METEOR COMBO
+</span>
+
+<span class="cost">
+40 KI
+</span>
+
 </button>
 
-<button id="spiritBtn" class="skill ultimate" onclick="useSpiritBomb()">
-<span class="skillName">SPIRIT BOMB</span>
-<span class="cost">85 KI</span>
+<button
+id="kameBtn"
+class="skill"
+onclick="useKamehameha(false)">
+
+<span class="skillName">
+KAMEHAMEHA
+</span>
+
+<span class="cost">
+70 KI
+</span>
+
+</button>
+
+<button
+id="spiritBtn"
+class="skill ultimate"
+onclick="useSpiritBomb(false)">
+
+<span class="skillName">
+ULTIMATE<br>SPIRIT BOMB
+</span>
+
+<span class="cost">
+100 KI
+</span>
+
 </button>
 
 </div>
-
 </div>
 
 <script>
+
+/* =========================
+   COMBAT DATA
+========================= */
+
 let goku={
-hp:1000,
-maxHp:1000,
-attack:100,
-defence:50,
+hp:850,
+maxHp:850,
+attack:80,
+defence:45,
 ki:0,
 maxKi:100
 };
@@ -592,13 +823,20 @@ maxKi:100
 let enemy={
 hp:1000,
 maxHp:1000,
-attack:90,
-defence:45
+attack:75,
+defence:40
 };
 
 let battleOver=false;
+let autoMode=false;
+let abilityBusy=false;
 
-const $=id=>document.getElementById(id);
+const $=id=>
+document.getElementById(id);
+
+/* =========================
+   HUD
+========================= */
 
 function updateHUD(){
 
@@ -613,7 +851,7 @@ $("playerKI").style.width=
 
 $("gStats").innerText=
 Math.ceil(goku.hp)+
-" / 1000 HP • "+
+" / 850 HP • "+
 Math.floor(goku.ki)+
 " / 100 KI";
 
@@ -622,23 +860,68 @@ Math.ceil(enemy.hp)+
 " / 1000 HP";
 
 $("kiBtn").disabled=
-battleOver||goku.ki<15;
+battleOver||
+abilityBusy||
+goku.ki<20;
+
+$("meteorBtn").disabled=
+battleOver||
+abilityBusy||
+goku.ki<40;
 
 $("kameBtn").disabled=
-battleOver||goku.ki<75;
+battleOver||
+abilityBusy||
+goku.ki<70;
 
 $("spiritBtn").disabled=
-battleOver||goku.ki<85;
+battleOver||
+abilityBusy||
+goku.ki<100;
 }
 
-function text(message){
+function combatText(message){
 $("combatText").innerText=message;
 }
+
+/* =========================
+   AUTO MODE
+========================= */
+
+function toggleAuto(){
+
+autoMode=!autoMode;
+
+let button=$("autoToggle");
+
+if(autoMode){
+
+button.innerText="AUTO";
+button.classList.add("autoOn");
+
+combatText(
+"Auto abilities enabled"
+);
+
+}else{
+
+button.innerText="MANUAL";
+button.classList.remove("autoOn");
+
+combatText(
+"Manual abilities enabled"
+);
+
+}
+}
+
+/* =========================
+   DAMAGE NUMBERS
+========================= */
 
 function damageNumber(target,amount){
 
 let fighter=$(target);
-
 let rect=
 fighter.getBoundingClientRect();
 
@@ -649,7 +932,8 @@ number.className="damage";
 number.innerText="-"+amount;
 
 number.style.left=
-(rect.left+rect.width/2)+"px";
+(rect.left+
+rect.width/2)+"px";
 
 number.style.top=
 rect.top+"px";
@@ -661,6 +945,10 @@ number.remove();
 },800);
 }
 
+/* =========================
+   HIT REACTION
+========================= */
+
 function hitEffect(target){
 
 let fighter=$(target);
@@ -669,31 +957,57 @@ fighter.classList.remove("idle");
 fighter.classList.add("hit");
 
 setTimeout(()=>{
+
 fighter.classList.remove("hit");
 fighter.classList.add("idle");
+
 },260);
 }
 
 function shake(){
 
-$("game").classList.add("screenShake");
+$("game").classList.add(
+"screenShake"
+);
 
 setTimeout(()=>{
-$("game").classList.remove("screenShake");
+
+$("game").classList.remove(
+"screenShake"
+);
+
 },300);
 }
+
+/* =========================
+   DAMAGE
+========================= */
 
 function hurtEnemy(damage,label){
 
 if(battleOver)return;
 
 enemy.hp=
-Math.max(0,enemy.hp-damage);
+Math.max(
+0,
+enemy.hp-damage
+);
 
-damageNumber("saibaman",damage);
-hitEffect("saibaman");
+damageNumber(
+"saibaman",
+damage
+);
 
-text(label+" dealt "+damage+" damage!");
+hitEffect(
+"saibaman"
+);
+
+combatText(
+label+
+" • "+
+damage+
+" damage"
+);
 
 checkBattle();
 updateHUD();
@@ -704,54 +1018,118 @@ function hurtGoku(damage){
 if(battleOver)return;
 
 goku.hp=
-Math.max(0,goku.hp-damage);
+Math.max(
+0,
+goku.hp-damage
+);
 
-damageNumber("goku",damage);
-hitEffect("goku");
+damageNumber(
+"goku",
+damage
+);
 
-text(
-"Saibaman dealt "+
+hitEffect(
+"goku"
+);
+
+combatText(
+"Saibaman hit Goku • "+
 damage+
-" damage!"
+" damage"
 );
 
 checkBattle();
 updateHUD();
 }
 
-/* automatic attacks */
+/* =========================
+   BASIC ATTACK SYSTEM
+========================= */
+
+const basicAttacks=[
+
+{
+name:"Jab",
+animation:"jab",
+damage:30,
+impact:190,
+duration:400
+},
+
+{
+name:"Cross",
+animation:"cross",
+damage:34,
+impact:240,
+duration:500
+},
+
+{
+name:"Front Kick",
+animation:"frontKick",
+damage:38,
+impact:270,
+duration:540
+},
+
+{
+name:"Heavy Kick",
+animation:"heavyKick",
+damage:43,
+impact:330,
+duration:650
+}
+
+];
 
 function gokuBasic(){
 
-if(battleOver)return;
+if(
+battleOver||
+abilityBusy
+)return;
+
+let attack=
+basicAttacks[
+Math.floor(
+Math.random()*
+basicAttacks.length
+)
+];
 
 let fighter=$("goku");
 
 fighter.classList.remove("idle");
-fighter.classList.add("gokuAttack");
+
+fighter.classList.add(
+attack.animation
+);
 
 setTimeout(()=>{
 
-let damage=
-Math.max(
-1,
-goku.attack-enemy.defence
-);
+if(battleOver)return;
 
 hurtEnemy(
-damage,
-"Goku's basic attack"
+attack.damage,
+attack.name
 );
 
-},180);
+},attack.impact);
 
 setTimeout(()=>{
 
-fighter.classList.remove("gokuAttack");
+fighter.classList.remove(
+attack.animation
+);
+
 fighter.classList.add("idle");
 
-},380);
+},attack.duration);
 }
+
+/* =========================
+   ENEMY BASIC ATTACK
+========================= */
 
 function enemyBasic(){
 
@@ -760,41 +1138,55 @@ if(battleOver)return;
 let fighter=$("saibaman");
 
 fighter.classList.remove("idle");
-fighter.classList.add("enemyAttack");
+fighter.classList.add(
+"enemyAttack"
+);
 
 setTimeout(()=>{
 
-let damage=
-Math.max(
-1,
-enemy.attack-goku.defence
-);
+if(battleOver)return;
+
+let damage=30;
 
 hurtGoku(damage);
 
-},180);
+},220);
 
 setTimeout(()=>{
 
-fighter.classList.remove("enemyAttack");
+fighter.classList.remove(
+"enemyAttack"
+);
+
 fighter.classList.add("idle");
 
-},380);
+},470);
 }
 
-/* KI BLAST */
+/* =========================
+   KI BLAST
+========================= */
 
-function useKiBlast(){
+function useKiBlast(fromAI){
 
 if(
 battleOver||
-goku.ki<15
+abilityBusy||
+goku.ki<20
 )return;
 
-goku.ki-=15;
+abilityBusy=true;
+goku.ki-=20;
+
 updateHUD();
 
-text("Goku used Ki Blast!");
+combatText(
+fromAI
+?
+"Goku chose Ki Blast!"
+:
+"Ki Blast!"
+);
 
 let ball=$("kiBall");
 
@@ -802,112 +1194,281 @@ ball.classList.add("fireKi");
 
 setTimeout(()=>{
 
-let damage=
-Math.max(
-1,
-Math.round(
-goku.attack*1.25-
-enemy.defence
-)
-);
-
 hurtEnemy(
-damage,
+65,
 "Ki Blast"
 );
 
-ball.classList.remove("fireKi");
+ball.classList.remove(
+"fireKi"
+);
 
-},450);
+abilityBusy=false;
+
+updateHUD();
+
+},500);
 }
 
-/* KAMEHAMEHA */
+/* =========================
+   METEOR COMBO
+========================= */
 
-function useKamehameha(){
+function useMeteor(fromAI){
 
 if(
 battleOver||
-goku.ki<75
+abilityBusy||
+goku.ki<40
 )return;
 
-goku.ki-=75;
+abilityBusy=true;
+goku.ki-=40;
+
 updateHUD();
 
-text("KAMEHAMEHA!");
+combatText(
+fromAI
+?
+"Goku chose Meteor Combo!"
+:
+"Meteor Combo!"
+);
+
+let fighter=$("goku");
+
+fighter.classList.remove("idle");
+fighter.classList.add("meteor");
+
+/* multiple impacts */
+
+setTimeout(()=>{
+hurtEnemy(
+25,
+"Meteor Combo"
+);
+},250);
+
+setTimeout(()=>{
+hurtEnemy(
+25,
+"Meteor Combo"
+);
+},430);
+
+setTimeout(()=>{
+hurtEnemy(
+35,
+"Meteor Combo"
+);
+shake();
+},650);
+
+setTimeout(()=>{
+
+fighter.classList.remove(
+"meteor"
+);
+
+fighter.classList.add("idle");
+
+abilityBusy=false;
+
+updateHUD();
+
+},920);
+}
+
+/* =========================
+   KAMEHAMEHA
+========================= */
+
+function useKamehameha(fromAI){
+
+if(
+battleOver||
+abilityBusy||
+goku.ki<70
+)return;
+
+abilityBusy=true;
+goku.ki-=70;
+
+updateHUD();
+
+combatText(
+fromAI
+?
+"Goku chose Kamehameha!"
+:
+"KAMEHAMEHA!"
+);
 
 let beam=$("beam");
 
-beam.classList.add("fireBeam");
+beam.classList.add(
+"fireBeam"
+);
 
 setTimeout(()=>{
 
-let damage=
-Math.max(
-1,
-Math.round(
-goku.attack*4-
-enemy.defence
-)
-);
-
-shake();
-
 hurtEnemy(
-damage,
+170,
 "Kamehameha"
 );
 
-},420);
+shake();
+
+},450);
 
 setTimeout(()=>{
-beam.classList.remove("fireBeam");
-},850);
+
+beam.classList.remove(
+"fireBeam"
+);
+
+abilityBusy=false;
+
+updateHUD();
+
+},900);
 }
 
-/* SPIRIT BOMB */
+/* =========================
+   ULTIMATE
+========================= */
 
-function useSpiritBomb(){
+function useSpiritBomb(fromAI){
 
 if(
 battleOver||
-goku.ki<85
+abilityBusy||
+goku.ki<100
 )return;
 
-goku.ki-=85;
+abilityBusy=true;
+goku.ki-=100;
+
 updateHUD();
 
-text("SPIRIT BOMB!");
+combatText(
+fromAI
+?
+"Goku unleashed his Ultimate!"
+:
+"SPIRIT BOMB!"
+);
 
 let bomb=$("spiritBomb");
 
-bomb.classList.add("spiritFire");
+bomb.classList.add(
+"spiritFire"
+);
 
 setTimeout(()=>{
 
-let damage=
-Math.max(
-1,
-Math.round(
-goku.attack*7-
-enemy.defence
-)
+hurtEnemy(
+260,
+"Spirit Bomb"
 );
 
 shake();
 
-hurtEnemy(
-damage,
-"Spirit Bomb"
-);
-
-},1200);
+},1250);
 
 setTimeout(()=>{
-bomb.classList.remove("spiritFire");
-},1400);
+
+bomb.classList.remove(
+"spiritFire"
+);
+
+abilityBusy=false;
+
+updateHUD();
+
+},1450);
 }
 
-/* end battle */
+/* =========================
+   AUTO ABILITY AI
+========================= */
+
+function autoDecision(){
+
+if(
+!autoMode||
+battleOver||
+abilityBusy
+)return;
+
+let ki=goku.ki;
+
+let roll=Math.random();
+
+/*
+The AI does NOT automatically
+spend Ki as soon as possible.
+
+It sometimes saves Ki for
+stronger abilities.
+*/
+
+if(ki>=100){
+
+if(roll<.70){
+useSpiritBomb(true);
+return;
+}
+
+if(roll<.90){
+useKamehameha(true);
+return;
+}
+
+}
+
+if(ki>=70){
+
+if(roll<.45){
+useKamehameha(true);
+return;
+}
+
+if(roll<.62){
+useMeteor(true);
+return;
+}
+
+}
+
+if(ki>=40){
+
+if(roll<.25){
+useMeteor(true);
+return;
+}
+
+}
+
+if(ki>=20){
+
+/*
+Low chance prevents constant
+Ki Blast spam and lets Goku
+save energy.
+*/
+
+if(roll<.08){
+useKiBlast(true);
+return;
+}
+
+}
+}
+
+/* =========================
+   BATTLE END
+========================= */
 
 function checkBattle(){
 
@@ -917,9 +1478,7 @@ endBattle(
 "VICTORY!"
 );
 
-}
-
-else if(goku.hp<=0){
+}else if(goku.hp<=0){
 
 endBattle(
 "DEFEAT"
@@ -937,16 +1496,24 @@ $("result").style.display="block";
 
 $("restart").style.display="block";
 
-text(
+combatText(
 result==="VICTORY!"
 ?
 "Training Saibaman defeated!"
 :
 "Goku was defeated."
 );
+
+updateHUD();
 }
 
-/* KI regeneration */
+/* =========================
+   KI REGEN
+========================= */
+
+/*
+1.75 KI PER SECOND
+*/
 
 setInterval(()=>{
 
@@ -955,7 +1522,7 @@ if(!battleOver){
 goku.ki=
 Math.min(
 goku.maxKi,
-goku.ki+.5
+goku.ki+.175
 );
 
 updateHUD();
@@ -964,20 +1531,38 @@ updateHUD();
 
 },100);
 
-/* auto attack timers */
+/* =========================
+   COMBAT LOOPS
+========================= */
+
+/*
+Basic attacks remain automatic
+even in MANUAL mode.
+*/
 
 setInterval(
 gokuBasic,
-2000
+1800
 );
 
 setInterval(
 enemyBasic,
-2500
+2300
+);
+
+/*
+AI considers an ability
+roughly every 1.2 seconds.
+*/
+
+setInterval(
+autoDecision,
+1200
 );
 
 updateHUD();
+
 </script>
 
 </body>
-                       </html>
+  </html>
