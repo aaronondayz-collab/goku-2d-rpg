@@ -247,6 +247,15 @@ background:#173c91;
 border-radius:5px;
 }
 
+/* GAME-READY 2D FIGHTER */
+.gokuArt{width:100%;height:100%;object-fit:contain;image-rendering:auto;filter:drop-shadow(0 5px 2px rgba(0,0,0,.35));pointer-events:none}
+#goku{width:125px;height:175px;left:9%}
+.jab .gokuArt{transform:skewX(-8deg) scaleX(1.08)}
+.cross .gokuArt{transform:rotate(5deg) scaleX(1.08)}
+.frontKick .gokuArt{transform:rotate(-7deg) scale(1.08)}
+.heavyKick .gokuArt{transform:rotate(-14deg) scale(1.12)}
+.gokuArt{transition:transform .12s}
+
 /* PIXEL FIGHTER v0.4 */
 .spriteGoku{filter:drop-shadow(0 4px 0 rgba(0,0,0,.28));image-rendering:pixelated}
 .spriteGoku .spriteHair{position:absolute;left:21px;top:-3px;width:50px;height:46px;background:#101014;clip-path:polygon(0 58%,18% 42%,7% 20%,31% 30%,30% 3%,48% 24%,64% 0,66% 28%,94% 15%,78% 45%,100% 52%,68% 66%,34% 68%)}
@@ -699,15 +708,7 @@ MANUAL
 
 <!-- GOKU -->
 
-<div id="goku" class="fighter idle spriteGoku" aria-label="Goku">
-  <div class="spriteHair"></div>
-  <div class="spriteFace"></div>
-  <div class="spriteTorso"></div>
-  <div class="spriteArm backArm"></div>
-  <div class="spriteArm frontArm"></div>
-  <div class="spriteLeg backLeg"></div>
-  <div class="spriteLeg frontLeg"></div>
-</div>
+<div id="goku" class="fighter idle spriteGoku" aria-label="Goku"><img class="gokuArt" src="assets/goku/base-fighter.svg" alt=""></div>
 
 <!-- SAIBAMAN -->
 
