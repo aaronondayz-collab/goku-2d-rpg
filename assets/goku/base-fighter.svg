@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 240">
+<g stroke="#15131a" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+<!-- hair -->
+<path fill="#101015" d="M63 52 28 48 48 31 25 18 61 22 57 2 79 22 91 0 98 26 126 10 116 37 151 34 124 57 143 70 105 72 74 69Z"/>
+<!-- neck/head -->
+<path fill="#efad79" d="M67 49 112 45 119 67 105 91 76 88 61 68Z"/>
+<path fill="#fff" d="M72 61 84 57 81 68Z"/><path fill="#fff" d="m98 56 12 5-10 7Z"/>
+<path d="M82 76q10 8 21-1" fill="none" stroke-width="4"/>
+<!-- back arm -->
+<path fill="#e99b68" d="M60 92 38 100 20 132 35 143 58 119 73 108Z"/>
+<path fill="#163e9b" d="m24 127 18 10-8 17-19-12Z"/>
+<!-- torso gi -->
+<path fill="#f47b16" d="M61 86 111 83 135 111 124 157 82 169 47 144 48 106Z"/>
+<path fill="#153d99" d="m64 88 19 29 29-32 13 9-37 45-38-39Z"/>
+<path fill="#163d95" d="M53 143q37 14 73-1l3 17q-42 15-80 0Z"/>
+<!-- front arm -->
+<path fill="#efad79" d="m112 91 24 10 28 30-12 14-34-23-15-17Z"/>
+<path fill="#163e9b" d="m148 127 17 14-12 16-17-15Z"/>
+<!-- fists -->
+<path fill="#efad79" d="m18 126-12 6 3 18 17 5 12-12-5-15Z"/>
+<path fill="#efad79" d="m158 132 15 2 5 16-12 13-18-7-3-14Z"/>
+<!-- legs -->
+<path fill="#f47b16" d="m62 158-25 32 2 35 28 2 20-42 4-20Z"/>
+<path fill="#f47b16" d="m91 164 9 23 23 38 29-7-9-39-24-31Z"/>
+<!-- boots -->
+<path fill="#173d91" d="m39 216-11 15 5 7 40-1-5-18Z"/>
+<path fill="#173d91" d="m123 216 5 21 42-2 3-9-23-16Z"/>
+<path fill="#e74725" d="M35 229h35M132 228h35" stroke-width="4"/>
+</g></svg>
