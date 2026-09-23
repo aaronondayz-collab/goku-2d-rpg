@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-<title>Goku RPG v0.4 Animated Fighter</title>
+<title>Goku RPG v0.5 Pose Combat</title>
 
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -708,7 +708,7 @@ MANUAL
 
 <!-- GOKU -->
 
-<div id="goku" class="fighter idle spriteGoku" aria-label="Goku"><img class="gokuArt" src="assets/goku/base-fighter.svg" alt=""></div>
+<div id="goku" class="fighter idle spriteGoku" aria-label="Goku"><img id="gokuArt" class="gokuArt" src="assets/goku/base-fighter.svg" alt=""></div>
 
 <!-- SAIBAMAN -->
 
@@ -957,6 +957,7 @@ number.remove();
 function hitEffect(target){
 
 let fighter=$(target);
+if(target==="goku")setGokuPose("hit");
 
 fighter.classList.remove("idle");
 fighter.classList.add("hit");
@@ -965,6 +966,7 @@ setTimeout(()=>{
 
 fighter.classList.remove("hit");
 fighter.classList.add("idle");
+if(target==="goku")setGokuPose("idle");
 
 },260);
 }
@@ -1087,6 +1089,16 @@ duration:650
 
 ];
 
+const gokuPoses={
+idle:"assets/goku/base-fighter.svg",
+jab:"assets/goku/jab.svg",
+cross:"assets/goku/cross.svg",
+frontKick:"assets/goku/front-kick.svg",
+heavyKick:"assets/goku/heavy-kick.svg",
+hit:"assets/goku/hit.svg"
+};
+function setGokuPose(pose){const art=$("gokuArt");if(art)art.src=gokuPoses[pose]||gokuPoses.idle;}
+
 function gokuBasic(){
 
 if(
@@ -1109,6 +1121,7 @@ fighter.classList.remove("idle");
 fighter.classList.add(
 attack.animation
 );
+setGokuPose(attack.animation);
 
 setTimeout(()=>{
 
@@ -1128,6 +1141,7 @@ attack.animation
 );
 
 fighter.classList.add("idle");
+setGokuPose("idle");
 
 },attack.duration);
 }
