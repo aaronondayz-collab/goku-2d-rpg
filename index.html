@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-<title>Goku RPG v0.4</title>
+<title>Goku RPG v0.4 Animated Fighter</title>
 
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -246,6 +246,23 @@ height:16px;
 background:#173c91;
 border-radius:5px;
 }
+
+/* PIXEL FIGHTER v0.4 */
+.spriteGoku{filter:drop-shadow(0 4px 0 rgba(0,0,0,.28));image-rendering:pixelated}
+.spriteGoku .spriteHair{position:absolute;left:21px;top:-3px;width:50px;height:46px;background:#101014;clip-path:polygon(0 58%,18% 42%,7% 20%,31% 30%,30% 3%,48% 24%,64% 0,66% 28%,94% 15%,78% 45%,100% 52%,68% 66%,34% 68%)}
+.spriteFace{position:absolute;left:31px;top:27px;width:30px;height:31px;background:#efae78;border:3px solid #17151b;clip-path:polygon(8% 0,100% 10%,86% 90%,45% 100%,0 72%)}
+.spriteTorso{position:absolute;left:25px;top:54px;width:46px;height:48px;background:linear-gradient(135deg,#ff8b18 0 58%,#d94b0d 59%);border:4px solid #17151b;clip-path:polygon(15% 0,86% 5%,100% 85%,52% 100%,0 82%);box-shadow:inset 0 12px 0 #173d9b}
+.spriteArm{position:absolute;width:17px;height:54px;background:#efa66f;border:4px solid #17151b;border-radius:9px;transform-origin:50% 10%}
+.backArm{left:15px;top:59px;transform:rotate(24deg)}
+.frontArm{left:66px;top:58px;transform:rotate(-31deg)}
+.spriteLeg{position:absolute;top:96px;width:27px;height:55px;background:#f27612;border:4px solid #17151b;border-radius:8px;transform-origin:50% 5%;box-shadow:inset 0 -14px 0 #183f99}
+.backLeg{left:20px;transform:rotate(12deg)}
+.frontLeg{left:51px;transform:rotate(-10deg)}
+.jab .frontArm{animation:armJab .38s ease-out}.cross .frontArm{animation:armCross .48s ease-out}.frontKick .frontLeg{animation:legFront .52s ease-out}.heavyKick .frontLeg{animation:legHeavy .62s ease-out}
+@keyframes armJab{45%{transform:translate(38px,-7px) rotate(-88deg) scaleY(1.3)}}
+@keyframes armCross{50%{transform:translate(42px,-2px) rotate(-82deg) scaleY(1.35)}}
+@keyframes legFront{55%{transform:translate(48px,-20px) rotate(-88deg) scaleY(1.2)}}
+@keyframes legHeavy{50%{transform:translate(45px,-45px) rotate(-108deg) scaleY(1.25)}}
 
 /* SAIBAMAN */
 
@@ -682,27 +699,14 @@ MANUAL
 
 <!-- GOKU -->
 
-<div id="goku" class="fighter idle">
-
-<div class="head gokuHead">
-<div class="hair">▲</div>
-</div>
-
-<div class="body gokuBody">
-<div class="blueShirt"></div>
-</div>
-
-<div class="arm armL"></div>
-<div class="arm armR"></div>
-
-<div class="leg legL">
-<div class="boot"></div>
-</div>
-
-<div class="leg legR">
-<div class="boot"></div>
-</div>
-
+<div id="goku" class="fighter idle spriteGoku" aria-label="Goku">
+  <div class="spriteHair"></div>
+  <div class="spriteFace"></div>
+  <div class="spriteTorso"></div>
+  <div class="spriteArm backArm"></div>
+  <div class="spriteArm frontArm"></div>
+  <div class="spriteLeg backLeg"></div>
+  <div class="spriteLeg frontLeg"></div>
 </div>
 
 <!-- SAIBAMAN -->
